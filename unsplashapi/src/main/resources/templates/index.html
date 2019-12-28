@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>作者ID</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th>图片宽度</th>
+            <th>图片高度</th>
+            <th>图片描述</th>
+            <th>未处理图像链接</th>
+            <th>大图图像链接</th>
+            <th>规则图像链接</th>
+            <th>小尺寸图像链接</th>
+            <th>模板图像链接</th>
+        </tr>
+        <tr th:each="pic: ${picture}">
+
+        </tr>
+    </table>
+</body>
+</html>

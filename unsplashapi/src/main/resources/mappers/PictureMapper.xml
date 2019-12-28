@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuuuuu.unsplashapi.Dao.PictureMapper">
+  <resultMap id="BaseResultMap" type="com.xuuuuu.unsplashapi.Pojo.Picture">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="created_at" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="updated_at" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="width" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="height" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="urls_raw" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="urls_full" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="urls_regular" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="urls_small" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="urls_thumb" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="likes" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, created_at, updated_at, width, height, description, urls_raw, urls_full, urls_regular, 
+    urls_small, urls_thumb, likes, user_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from picture_message
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from picture_message
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xuuuuu.unsplashapi.Pojo.Picture">
+    insert into picture_message (id, created_at, updated_at, 
+      width, height, description, 
+      urls_raw, urls_full, urls_regular, 
+      urls_small, urls_thumb, likes, 
+      user_name)
+    values (#{id,jdbcType=VARCHAR}, #{createdAt,jdbcType=VARCHAR}, #{updatedAt,jdbcType=VARCHAR}, 
+      #{width,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{urlsRaw,jdbcType=VARCHAR}, #{urlsFull,jdbcType=VARCHAR}, #{urlsRegular,jdbcType=VARCHAR}, 
+      #{urlsSmall,jdbcType=VARCHAR}, #{urlsThumb,jdbcType=VARCHAR}, #{likes,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuuuuu.unsplashapi.Pojo.Picture">
+    insert into picture_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="urlsRaw != null">
+        urls_raw,
+      </if>
+      <if test="urlsFull != null">
+        urls_full,
+      </if>
+      <if test="urlsRegular != null">
+        urls_regular,
+      </if>
+      <if test="urlsSmall != null">
+        urls_small,
+      </if>
+      <if test="urlsThumb != null">
+        urls_thumb,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsRaw != null">
+        #{urlsRaw,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsFull != null">
+        #{urlsFull,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsRegular != null">
+        #{urlsRegular,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsSmall != null">
+        #{urlsSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsThumb != null">
+        #{urlsThumb,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuuuuu.unsplashapi.Pojo.Picture">
+    update picture_message
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsRaw != null">
+        urls_raw = #{urlsRaw,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsFull != null">
+        urls_full = #{urlsFull,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsRegular != null">
+        urls_regular = #{urlsRegular,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsSmall != null">
+        urls_small = #{urlsSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="urlsThumb != null">
+        urls_thumb = #{urlsThumb,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuuuuu.unsplashapi.Pojo.Picture">
+    update picture_message
+    set created_at = #{createdAt,jdbcType=VARCHAR},
+      updated_at = #{updatedAt,jdbcType=VARCHAR},
+      width = #{width,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      urls_raw = #{urlsRaw,jdbcType=VARCHAR},
+      urls_full = #{urlsFull,jdbcType=VARCHAR},
+      urls_regular = #{urlsRegular,jdbcType=VARCHAR},
+      urls_small = #{urlsSmall,jdbcType=VARCHAR},
+      urls_thumb = #{urlsThumb,jdbcType=VARCHAR},
+      likes = #{likes,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+<!--  获取所有图片信息-->
+  <select id="getAllPicture" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from picture_message
+  </select>
+
+<!--  分页获取图片信息-->
+  <select id="getLimitPicture" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from picture_message LIMIT #{start}, #{count}
+  </select>
+
+<!--  获取全部数据数量-->
+  <select id="getCount" resultType="int">
+    select count(*) from picture_message
+  </select>
+
+<!--  随机获取 count 条数据-->
+  <select id="getRandomPicture" parameterType="java.lang.Integer" resultType="com.xuuuuu.unsplashapi.Pojo.Picture">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM picture_message order by RAND() LIMIT #{count}
+  </select>
+</mapper>

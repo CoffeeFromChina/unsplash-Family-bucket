@@ -1,0 +1,25 @@
+.card{
+  margin: 5px 0;
+}
+.swipeout .i-swipeout-demo-item{
+  border-bottom: none;
+  padding: 0;
+  margin: 0;
+}
+.swipeout .i-swipeout-item{
+  margin: 0;
+  padding: 0;
+}
+.process{
+  display: block
+}
+.goUp{
+  z-index: 1000;
+  display: inline;
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  width: 40rpx;
+  height: 40rpx;
+  
+}

@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "van-card": "/vant_dist/card/index",
+    "van-icon": "/vant_dist/icon/index",
+    "van-row": "/vant_dist/row/index",
+    "van-col": "/vant_dist/col/index",
+    "van-skeleton": "/vant_dist/skeleton/index",
+    "van-notice-bar": "/vant_dist/notice-bar/index"
+  }
+}
