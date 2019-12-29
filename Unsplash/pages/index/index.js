@@ -59,7 +59,7 @@ Page({
   // 先在小程序注册完成后加载数据，再用
   onLoad: function(){
     var that = this;
-    var random = parseInt(Math.random()*5000);
+    var random = parseInt(Math.random()*10000);
     that.setData({
       start:random
     })
