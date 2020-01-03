@@ -6,6 +6,7 @@
     "van-row": "/vant_dist/row/index",
     "van-col": "/vant_dist/col/index",
     "van-skeleton": "/vant_dist/skeleton/index",
-    "van-notice-bar": "/vant_dist/notice-bar/index"
+    "van-notice-bar": "/vant_dist/notice-bar/index",
+    "van-search": "/vant_dist/search/index"
   }
 }

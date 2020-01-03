@@ -6,9 +6,10 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#495060",
-    "navigationBarTitleText": "Picture Picture",
+    "navigationBarTitleText": "Pichu",
     "navigationBarTextStyle": "white"
   },
+  "usingComponents": {},
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

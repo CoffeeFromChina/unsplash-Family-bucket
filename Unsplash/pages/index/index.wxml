@@ -3,8 +3,9 @@
   wrapable
   mode="closeable"
   scrollable="false"
-  text="点击右下角图标可预览图片，以及复制原图链接以提供用户在浏览器中下载原图（因为部分原因，小程序端暂无法提供图片下载；预览图片的画质与原图有一定差距。）！"
+  text="点击右下角图标可预览图片，以及复制原图链接以便在浏览器中下载原图（因为部分原因，小程序端暂无法提供图片下载；预览图片的画质与原图有一定差距。）！"
 />
+<van-search value="{{ value }}" name="search" shape="round" bind:search="onSearch" placeholder="请输入搜索关键词" />
 <view wx:for="{{pictureArray}}" wx:for-item="index">
 <view class="card">
     <van-card
