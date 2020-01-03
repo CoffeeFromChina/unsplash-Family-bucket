@@ -52,4 +52,10 @@ public class ApiController {
 	public Result gerRandomCount(@PathVariable("count") String count) {
 		return resultGenerator.genSuccessResult(apiService.getRandomPicture(count));
 	}
+
+	// 模糊查询
+	@RequestMapping(value = "/inquire/{query}/{start}/{count}", method = RequestMethod.GET)
+	public Result getInquireInformation(@PathVariable("query") String query, @PathVariable("start") String start, @PathVariable("count") String count){
+		return resultGenerator.genSuccessResult(apiService.getInquire(query, start, count));
+	}
 }

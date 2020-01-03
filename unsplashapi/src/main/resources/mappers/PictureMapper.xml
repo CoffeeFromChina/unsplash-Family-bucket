@@ -213,4 +213,13 @@
     <include refid="Base_Column_List" />
     FROM picture_message order by RAND() LIMIT #{count}
   </select>
+
+<!--  模糊查询-->
+  <select id="getInquire" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM picture_message
+    where CONCAT(IFNULL(description,''), IFNULL(user_name,''))
+    like '%${query}%' LIMIT ${start}, ${count}
+  </select>
 </mapper>

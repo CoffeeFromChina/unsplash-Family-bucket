@@ -45,4 +45,10 @@ public class ApiServiceimpl implements ApiService {
 	public List<Picture> getRandomPicture(String count) {
 		return pictureMapper.getRandomPicture(Integer.parseInt(count));
 	}
+
+	// 模糊查询
+	@Override
+	public List<Picture> getInquire(String query, String start, String count) {
+		return pictureMapper.getInquire(query, Integer.parseInt(start), Integer.parseInt(count));
+	}
 }

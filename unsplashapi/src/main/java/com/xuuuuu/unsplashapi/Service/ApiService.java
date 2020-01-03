@@ -24,4 +24,7 @@ public interface ApiService {
 
 	// 随机获取count条数据
 	List<Picture> getRandomPicture(String count);
+
+	// 模糊查询
+	List<Picture> getInquire(String query, String start, String count);
 }

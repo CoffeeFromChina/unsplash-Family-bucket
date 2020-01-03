@@ -32,4 +32,7 @@ public interface PictureMapper {
 
 	// 随机获取 count 条数据
 	List<Picture> getRandomPicture(@Param("count") int count);
+
+	// 模糊查询
+	List<Picture> getInquire(@Param("query") String query, @Param("start") int start, @Param("count") int count);
 }
