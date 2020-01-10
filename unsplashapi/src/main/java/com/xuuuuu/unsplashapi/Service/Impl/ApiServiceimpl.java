@@ -76,4 +76,14 @@ public class ApiServiceimpl implements ApiService {
 	public List<Picture> getAllLike(String openid, String limitStart, String limitCount) {
 		return pictureMapper.getAllLike(openid, Integer.parseInt(limitStart), Integer.parseInt(limitCount));
 	}
+
+	@Override
+	public List<Picture> getAllWatch(String openid, String limitStart, String limitCount) {
+		return pictureMapper.getAllWatch(openid, Integer.parseInt(limitStart), Integer.parseInt(limitCount));
+	}
+
+	@Override
+	public boolean insertWatch(String id, String openid, String picid) {
+		return picturePictureMapper.insertWatch(id, openid, picid);
+	}
 }

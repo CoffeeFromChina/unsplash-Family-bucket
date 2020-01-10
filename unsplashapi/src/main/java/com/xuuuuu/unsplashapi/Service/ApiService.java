@@ -38,5 +38,12 @@ public interface ApiService {
 	// 查找喜欢的图片
 	List<PicturePicture> selectPictureLike(String openid, String picid);
 
+	// 获取用户收藏的图片
 	List<Picture> getAllLike(String openid, String limitStart, String limitCount);
+
+	// 获取用户预览过的图片
+	List<Picture> getAllWatch(String openid, String limitStart, String limitCount);
+
+	// 用户预览图片时插入预览记录
+	boolean insertWatch(String id, String openid, String picid);
 }

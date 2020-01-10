@@ -73,8 +73,8 @@
   </update>
 
   <insert id="insertPictureLike">
-    INSERT IGNORE INTO picture_picture(id, openid, picid, isLike)
-    VALUES(#{uuid}, #{openid}, #{picid}, 1)
+    INSERT IGNORE INTO picture_picture(id, openid, picid, isLike, isWatch)
+    VALUES(#{uuid}, #{openid}, #{picid}, 1, 1)
   </insert>
 
   <select id="selectPictureLike" resultType="com.xuuuuu.unsplashapi.Pojo.PicturePicture">
@@ -84,4 +84,9 @@
     WHERE openid=#{openid}
     AND picid=#{picid}
   </select>
+
+  <insert id="insertWatch">
+    INSERT INTO picture_picture(id, openid, picid, isLike, isWatch)
+    VALUES(#{id}, #{openid}, #{picid}, 0, 1)
+  </insert>
 </mapper>

@@ -41,4 +41,7 @@ public interface PictureMapper {
 
 	// 根据用户 openid 获取所有喜欢的图片
 	List<Picture> getAllLike(@Param("openid") String openid, @Param("limitStart") int limitStart, @Param("limitCount") int limitCount);
+
+	// 获取用户预览过的图片
+	List<Picture> getAllWatch(@Param("openid") String openid, @Param("limitStart") int limitStart, @Param("limitCount") int limitCount);
 }

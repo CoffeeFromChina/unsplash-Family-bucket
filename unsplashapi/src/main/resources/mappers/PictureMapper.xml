@@ -229,8 +229,21 @@
 
   <select id="getAllLike" resultMap="BaseResultMap">
     SELECT * FROM `picture_message` as t1,
-    (SELECT picid FROM picture_picture WHERE openid = #{openid}) as c1
+        (SELECT picid FROM picture_picture
+            WHERE openid = #{openid} AND isLike > 0
+                GROUP BY openid, picid) as c1
     WHERE t1.id = c1.picid
+    order by updated_at DESC, created_at DESC
     LIMIT #{limitStart}, #{limitCount}
+  </select>
+
+  <select id="getAllWatch" resultMap="BaseResultMap">
+    SELECT * FROM `picture_message` as t1,
+      (SELECT picid FROM picture_picture
+          WHERE openid = #{openid} AND isWatch > 0
+              GROUP BY openid, picid) as c1
+    WHERE t1.id = c1.picid
+    order by updated_at DESC, created_at DESC
+    LIMIT #{limitStart},#{limitCount}
   </select>
 </mapper>

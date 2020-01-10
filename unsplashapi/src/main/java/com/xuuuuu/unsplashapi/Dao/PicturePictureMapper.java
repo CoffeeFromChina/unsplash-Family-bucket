@@ -24,4 +24,7 @@ public interface PicturePictureMapper {
 
     // 查找喜欢的图片（单个）
     List<PicturePicture> selectPictureLike(@Param("openid") String openid, @Param("picid")String picid);
+
+    // 用户预览图片时插入预览记录
+    boolean insertWatch(@Param("id") String id, @Param("openid") String openid, @Param("picid") String picid);
 }

@@ -81,4 +81,18 @@ public class ApiController {
 	public Result allLike(@PathVariable("openid") String openid, @PathVariable("limitStart") String limitStart, @PathVariable("limitCount") String limitCount){
 		return resultGenerator.genSuccessResult(apiService.getAllLike(openid, limitStart, limitCount));
 	}
+
+	// 获取用户预览过的图片（点击小眼睛）
+	@RequestMapping(value = "/watch/{openid}/{limitStart}/{limitCount}", method = RequestMethod.GET)
+	public Result watch(@PathVariable("openid") String openid, @PathVariable("limitStart") String limitStart, @PathVariable("limitCount") String limitCount){
+		return resultGenerator.genSuccessResult(apiService.getAllWatch(openid, limitStart, limitCount));
+	}
+
+	// 用户预览图片时插入预览记录
+	@RequestMapping(value = "/insertWatch/{openid}/{picid}", method = RequestMethod.GET)
+	public Result insertWatch(@PathVariable("openid") String openid, @PathVariable("picid") String picid){
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		return resultGenerator.genSuccessResult(apiService.insertWatch(id, openid, picid));
+	}
 }
