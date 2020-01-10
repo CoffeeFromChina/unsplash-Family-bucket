@@ -5,7 +5,7 @@
 </van-row>
 <van-grid column-num="2" border="ture" clickable="true" square>
   <!-- <van-grid-item icon="photo-o" text="图片"/> -->
-  <van-grid-item icon="browsing-history" text="看过"/>
+  <van-grid-item icon="browsing-history" url="../more/look/look" text="看过"/>
   <van-grid-item icon="like" url="../more/like/like"  text="喜欢"/>
   <!-- <van-grid-item icon="friends-o" dot="true" link-type="redirectTo" url="../more/information/information" text="信息"/> -->
   <!-- <van-grid-item icon="down" text="下载"/>

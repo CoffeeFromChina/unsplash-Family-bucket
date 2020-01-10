@@ -1,0 +1,13 @@
+.card{
+  margin: 5px 0;
+}
+/* 回到顶部图片 */
+.goUp{  
+  z-index: 1000;
+  display: inline;
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  width: 40rpx;
+  height: 40rpx; 
+}

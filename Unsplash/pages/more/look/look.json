@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "我的喜欢",
+  "navigationBarTitleText": "我看过",
   "usingComponents": {
     "van-image": "/vant_dist/image/index",
     "van-card": "/vant_dist/card/index",

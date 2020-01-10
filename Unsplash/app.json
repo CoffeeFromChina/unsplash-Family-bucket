@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/my/my",
     "pages/more/information/information",
-    "pages/more/like/like"
+    "pages/more/like/like",
+    "pages/more/look/look"
   ],
   "window": {
     "backgroundTextStyle": "dark",

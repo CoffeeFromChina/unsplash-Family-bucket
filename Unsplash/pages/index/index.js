@@ -147,10 +147,17 @@ Page({
   previewImg: function(e) {
     console.log(e);
     var rawurl = e.currentTarget.dataset.raw;   // 获取要预览的图片的链接
+    var picid = e.currentTarget.dataset.id;
     wx.previewImage({
       urls: [rawurl],             // 设置 urls；可设置多个。
-      success: function(res) {
+      success: function(res) {    // 插入预览记录
         console.log("查看成功")
+        wx.request({
+          url: 'https://xuuuuucong.top/unsplashapi/insertWatch/' + app.globalData.openid + '/' + picid,
+          success:function(e){
+            console.log("插入成功："+e)
+          }
+        })
       },
     })
   },
