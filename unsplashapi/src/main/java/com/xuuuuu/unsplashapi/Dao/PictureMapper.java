@@ -35,4 +35,10 @@ public interface PictureMapper {
 
 	// 模糊查询
 	List<Picture> getInquire(@Param("query") String query, @Param("start") int start, @Param("count") int count);
+
+	// 插入用户 openid
+	boolean initUser(@Param("openid") String openid);
+
+	// 根据用户 openid 获取所有喜欢的图片
+	List<Picture> getAllLike(@Param("openid") String openid, @Param("limitStart") int limitStart, @Param("limitCount") int limitCount);
 }

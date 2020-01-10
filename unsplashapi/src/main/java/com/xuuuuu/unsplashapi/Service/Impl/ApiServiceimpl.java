@@ -1,7 +1,9 @@
 package com.xuuuuu.unsplashapi.Service.Impl;
 
 import com.xuuuuu.unsplashapi.Dao.PictureMapper;
+import com.xuuuuu.unsplashapi.Dao.PicturePictureMapper;
 import com.xuuuuu.unsplashapi.Pojo.Picture;
+import com.xuuuuu.unsplashapi.Pojo.PicturePicture;
 import com.xuuuuu.unsplashapi.Service.ApiService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ApiServiceimpl implements ApiService {
 
 	@Autowired
 	PictureMapper pictureMapper;
+
+	@Autowired
+	PicturePictureMapper picturePictureMapper;
 
 	// 获取所有图片信息
 	@Override
@@ -50,5 +55,25 @@ public class ApiServiceimpl implements ApiService {
 	@Override
 	public List<Picture> getInquire(String query, String start, String count) {
 		return pictureMapper.getInquire(query, Integer.parseInt(start), Integer.parseInt(count));
+	}
+
+	@Override
+	public boolean initUser(String openid) {
+		return pictureMapper.initUser(openid);
+	}
+
+	@Override
+	public boolean insertPictureLike(String uuid, String openid, String picid) {
+		return picturePictureMapper.insertPictureLike(uuid, openid, picid);
+	}
+
+	@Override
+	public List<PicturePicture> selectPictureLike(String openid, String picid) {
+		return picturePictureMapper.selectPictureLike(openid, picid);
+	}
+
+	@Override
+	public List<Picture> getAllLike(String openid, String limitStart, String limitCount) {
+		return pictureMapper.getAllLike(openid, Integer.parseInt(limitStart), Integer.parseInt(limitCount));
 	}
 }

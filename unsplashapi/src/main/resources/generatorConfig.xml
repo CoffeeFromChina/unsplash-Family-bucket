@@ -64,7 +64,10 @@
         </javaClientGenerator>
 
         <!-- 要生成那些表(更改tableName和domainObjectName就可以，对于后面几个属性可以防止产生其他不需要的配置) -->
-        <table tableName="picture_message" domainObjectName="Picture" enableCountByExample="false"
+        <table tableName="picture_id" domainObjectName="PictureId" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="picture_picture" domainObjectName="PicturePicture" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
     </context>

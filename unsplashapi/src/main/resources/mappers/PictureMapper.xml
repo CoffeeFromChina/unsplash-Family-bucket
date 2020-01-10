@@ -222,4 +222,15 @@
     where CONCAT(IFNULL(description,''), IFNULL(user_name,''))
     like '%${query}%' LIMIT ${start}, ${count}
   </select>
+
+  <insert id="initUser">
+    REPLACE INTO picture_id(openid) VALUES(#{openid})
+  </insert>
+
+  <select id="getAllLike" resultMap="BaseResultMap">
+    SELECT * FROM `picture_message` as t1,
+    (SELECT picid FROM picture_picture WHERE openid = #{openid}) as c1
+    WHERE t1.id = c1.picid
+    LIMIT #{limitStart}, #{limitCount}
+  </select>
 </mapper>

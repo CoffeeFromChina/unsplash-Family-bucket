@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,6 +30,12 @@ public class ApiController {
 
 	@Autowired
 	ResultGenerator resultGenerator;
+
+	// 插入用户openid
+	@RequestMapping(value = "/init/{openid}", method = RequestMethod.POST)
+	public Result init(@PathVariable("openid") String openid){
+		return resultGenerator.genSuccessResult(apiService.initUser(openid));
+	}
 
 	// 返回全部数据
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -57,5 +65,20 @@ public class ApiController {
 	@RequestMapping(value = "/inquire/{query}/{start}/{count}", method = RequestMethod.GET)
 	public Result getInquireInformation(@PathVariable("query") String query, @PathVariable("start") String start, @PathVariable("count") String count){
 		return resultGenerator.genSuccessResult(apiService.getInquire(query, start, count));
+	}
+
+	// 设置喜欢的图片
+	@RequestMapping(value = "/like/{openid}/{picid}", method = RequestMethod.GET)
+	public Result isLike(@PathVariable("openid") String openid, @PathVariable("picid") String picid){
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		apiService.insertPictureLike(id ,openid, picid);
+		return resultGenerator.genSuccessResult(apiService.selectPictureLike(openid, picid));
+	}
+
+	// 用户获取自己喜欢的图片
+	@RequestMapping(value = "/allLike/{openid}/{limitStart}/{limitCount}")
+	public Result allLike(@PathVariable("openid") String openid, @PathVariable("limitStart") String limitStart, @PathVariable("limitCount") String limitCount){
+		return resultGenerator.genSuccessResult(apiService.getAllLike(openid, limitStart, limitCount));
 	}
 }
