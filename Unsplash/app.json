@@ -1,13 +1,35 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/my/my",
+    "pages/more/information/information",
+    "pages/more/like/like"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#495060",
     "navigationBarTitleText": "Pichu",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#B3B3B3",
+    "selectedColor": "#4D4D4D",
+    "backgroundColor": "#fafafa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "img",
+        "iconPath": "pages/icon/img.png",
+        "selectedIconPath": "pages/icon/img (1).png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "my",
+        "iconPath": "pages/icon/my.png",
+        "selectedIconPath": "pages/icon/my (1).png"
+      }
+    ]
   },
   "usingComponents": {},
   "style": "v2",

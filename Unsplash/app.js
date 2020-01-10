@@ -1,6 +1,11 @@
 //app.js
 App({
   onLaunch: function () {
+    wx.cloud.init({
+      env: 'wxapi-lnv8i',
+      traceUser: true
+    })
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -34,6 +39,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openid:''
   }
 })

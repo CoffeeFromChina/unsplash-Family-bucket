@@ -1,0 +1,12 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "我的喜欢",
+  "onReachBottomDistance":100,
+  "usingComponents": {
+    "van-image": "/vant_dist/image/index",
+    "van-card": "/vant_dist/card/index",
+    "van-icon": "/vant_dist/icon/index",
+    "van-row": "/vant_dist/row/index",
+    "van-col": "/vant_dist/col/index"
+  }
+}

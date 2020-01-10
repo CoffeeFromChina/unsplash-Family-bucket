@@ -1,0 +1,18 @@
+<van-row type="bc">
+  <van-col offset="9" span="8">
+    <van-image show-error="true" round width="5rem" height="5rem" lazy-load="true" round="true" src="{{userInfo.avatarUrl}}" />
+  </van-col>
+</van-row>
+<van-grid column-num="2" border="ture" clickable="true" square>
+  <!-- <van-grid-item icon="photo-o" text="图片"/> -->
+  <van-grid-item icon="browsing-history" text="看过"/>
+  <van-grid-item icon="like" url="../more/like/like"  text="喜欢"/>
+  <!-- <van-grid-item icon="friends-o" dot="true" link-type="redirectTo" url="../more/information/information" text="信息"/> -->
+  <!-- <van-grid-item icon="down" text="下载"/>
+  <van-grid-item icon="like-o" text="文字"/> -->
+</van-grid>
+<van-row>
+  <van-col offset="5"  span="8">
+    <van-button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="primary" size="large">登录</van-button>
+  </van-col>
+</van-row>

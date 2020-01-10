@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "我的主页",
+  "usingComponents": {
+    "van-button": "/vant_dist/button/index",
+    "van-image": "/vant_dist/image/index",
+    "van-row": "/vant_dist/row/index",
+    "van-col": "/vant_dist/col/index",
+    "van-grid": "/vant_dist/grid/index",
+    "van-grid-item": "/vant_dist/grid-item/index",
+    "van-icon": "/vant_dist/icon/index"
+  }
+}

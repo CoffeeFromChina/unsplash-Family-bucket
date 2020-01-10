@@ -6,12 +6,14 @@ Page({
     pictureArray: [],   // 图片数组
     start: 0,           // 默认查找方式的起始位置
     count: 10,          // 默认查找方式的起始数量
-    randomCount: 10,    // 随机获取突破的起始数量
+    hiddenn: true,      // 控制搜索框的隐藏
+    randomCount: 10,    // 随机获取图片的起始数量
     search:'',          // 要查找的图片
     searchStart: 0,     // 要查找的数据的起始位置
     searchCount: 10,    // 要查找的数据的起始数量
     isSearch: false,    // 配合 onReachBottom() 判断查找更多数据的方式
-    searchClass: ''     // 要查找的数据类型
+    searchClass: '',    // 要查找的数据类型
+    openid: '',
   },
   // 下拉刷新事件
   onPullDownRefresh: function () {
@@ -19,8 +21,9 @@ Page({
     var that = this;
     that.setData({
       isSearch: false,    // 设为 false，即之后获取更多数据时采用默认方式
-      pictureArray: null, // 重置数据数组
+      pictureArray: [], // 重置数据数组
       count: 10,          // 重置获取数据的数量
+      hiddenn: true       // 隐藏搜索框 
     })
     console.log("下拉："+that.data.isSearch)
     that.gainLoadingListData()
@@ -71,27 +74,32 @@ Page({
       })
     }
   },
+  // 隐/显搜索框
+  hiddennInput:function(){
+    var that = this
+    var hiddenn = that.data.hiddenn
+    if(hiddenn){
+      that.setData({
+        hiddenn: false
+      })
+    }else{
+      that.setData({
+        hiddenn: true
+      })
+    }
+    console.log(that.data.hiddenn)
+  },
   // 先在小程序注册完成后加载数据，再用
   onLoad: function(){
     var that = this;
+    that.getOpenid()
     var random = parseInt(Math.random()*10000); //设置随机获取数据的起始位置
     that.setData({
       start:random
     })
     this.reNew();
   },
-  // 获取网站图片统计信息
-  onShow: function () {   // 似乎邮电鸡肋，先不管这个函数，总之不影响程序运行
-    var that = this
-    wx.request({
-      url: 'https://xuuuuucong.top/unsplashapi/total',
-      success: function (e) {
-        that.setData({
-          total: (e.data.data) / 5
-        })
-        console.log("total：" + that.data.total)
-      }
-    })
+  onShow: function () {
   },
   // 复制图片链接到剪切板，供用户用浏览器下载
   click:function(e){
@@ -101,17 +109,24 @@ Page({
       data: full,
     })
   },
-  // 程序启动时加载图片数据
+  // 程序启动时加载图片数据。默认的图片加载函数
   reNew: function() {
     var that = this
     wx.request({  
       url: 'https://xuuuuucong.top/unsplashapi/limit/'+that.data.start+'/'+that.data.count,
       success: function(e) {
+        if (!that.data.hiddenn) {
+          that.setData({
+            hiddenn: false,
+          })
+        }
         console.log(e)
-        that.setData({
-          start: that.data.start+10,                                // 设置获取数据的起始位置 
-          pictureArray: that.data.pictureArray.concat(e.data.data)  // 添加数据
-        })
+        if (e.data.data.length > 0) {
+          that.setData({
+            start: that.data.start+10,                                // 设置获取数据的起始位置 
+            pictureArray: that.data.pictureArray.concat(e.data.data), // 添加数据
+          })
+        }
       }
     })
   },
@@ -158,13 +173,66 @@ Page({
         url: 'https://xuuuuucong.top/unsplashapi/inquire/' + detail + '/' + that.data.searchStart + '/' + that.data.searchCount,
       success: function (e) {
         console.log(e)
-        that.setData({
-          isSearch: true,
-          searchClass: detail,
-          searchStart: that.data.searchStart+10,
-          pictureArray: that.data.pictureArray.concat(e.data.data)
-        })
+        if (e.data.data.length > 0) {
+          that.setData({
+            isSearch: true,
+            hiddenn: true,
+            searchClass: detail,
+            searchStart: that.data.searchStart + 10,
+            pictureArray: that.data.pictureArray.concat(e.data.data)
+          })
+        }        
       }
     })
-  }
+  },
+  // 搜索框==》取消
+  cancelSearch: function(e){
+    var that = this;
+    that.hiddennInput();
+  },
+  like:function(e){
+    var that = this
+    // 检查是否有用户信息，没有就跳转 my 页面进行登录
+    if (!app.globalData.userInfo) {
+      wx.showModal({
+        title: '请登录',
+        content: '点击确定，前往 my 页面登录',
+        success:function(res){
+          if (res.confirm) {
+            wx.switchTab({
+              url: '/pages/my/my',
+            })
+          }
+        }
+      })
+    }else{
+      var picId = e.currentTarget.dataset.id
+      console.log(picId)
+      console.log(that.data.openid)
+      wx.request({
+        url: 'https://xuuuuucong.top/unsplashapi/like/' + app.globalData.openid + '/' + picId,
+        success: function (e) {
+          console.log("hha" + e)
+        }
+      })
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'success',
+        duration: 1000
+      })
+    }
+  },
+  // 使用云函数获取用户openid
+  // 参考文章 https://cloud.tencent.com/document/product/876/32313
+  getOpenid() {
+    var that = this;
+    wx.cloud.callFunction({
+      name: 'getOpenid',  // 云函数名称
+      complete: res => {
+        console.log(res.result)
+        app.globalData.openid = res.result.openid   // 页面初次加载时就设置全局的 openid,方便其他页面使用
+        console.log('云函数获取到的openid: ', app.globalData.openid)
+      }
+    })
+  },
 })
