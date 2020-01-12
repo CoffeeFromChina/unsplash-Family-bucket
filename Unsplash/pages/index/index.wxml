@@ -5,7 +5,7 @@
   wrapable
   mode="closeable"
   scrollable="false"
-  text="点击右下角图标可预览图片，以及复制原图链接以便在浏览器中下载原图（因为部分原因，小程序端暂无法提供图片下载；预览图片的画质与原图有一定差距。）！"
+  text="因 Unsplash 为国外网站,所以服务器下载原图较慢,请见谅."
 />
 <view hidden="{{hiddenn}}">
   <van-search value="{{ value }}" focus="true" show-action background="none" class="input" name="search" shape="round" bind:search="onSearch" bind:cancel="cancelSearch" placeholder="请输入搜索关键词" />
@@ -24,14 +24,17 @@
     >
       <view slot="footer">
         <van-row>
-          <van-col offset="19" span="1">
+          <van-col offset="17" span="1">
+            <van-icon name="down" bindtap="down" />
+          </van-col>
+          <van-col offset="1" span="1">
             <van-icon class="juzhong" data-full="{{pictureArray[index].urlsFull}}" bindtap="click" name="/pages/icon/copy.png" />
           </van-col>
           <van-col offset="1" span="1">
             <van-icon data-id="{{pictureArray[index].id}}" bindtap="like" offset="1" span="3" name="like-o" />
           </van-col>
           <van-col offset="1" span="1">
-            <van-icon span="1" data-id="{{pictureArray[index].id}}" data-raw="{{pictureArray[index].urlsSmall}}" bindtap="previewImg" name="eye-o" />
+            <van-icon span="1" data-id="{{pictureArray[index].id}}" data-full="{{pictureArray[index].urlsFull}}" data-raw="{{pictureArray[index].urlsSmall}}" bindtap="previewImg" name="eye-o" />
             </van-col>
         </van-row>
       </view>

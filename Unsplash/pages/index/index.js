@@ -13,7 +13,8 @@ Page({
     searchCount: 10,    // 要查找的数据的起始数量
     isSearch: false,    // 配合 onReachBottom() 判断查找更多数据的方式
     searchClass: '',    // 要查找的数据类型
-    openid: '',
+    openid: '',         // 用户唯一标识符
+    url: '',            // nodejs 服务器下载的图片地址
   },
   // 下拉刷新事件
   onPullDownRefresh: function () {
@@ -21,7 +22,7 @@ Page({
     var that = this;
     that.setData({
       isSearch: false,    // 设为 false，即之后获取更多数据时采用默认方式
-      pictureArray: [], // 重置数据数组
+      pictureArray: [],   // 重置数据数组
       count: 10,          // 重置获取数据的数量
       hiddenn: true       // 隐藏搜索框 
     })
@@ -101,8 +102,43 @@ Page({
   },
   onShow: function () {
   },
+  // 下载图片.在下载之前,必须先点击预览按钮.
+  // 这是因为预览时会向服务器发送原图链接,以便在服务器下载原图.
+  // 服务器下载完成后,小程序才能下载,且因 unsplash 为国外网站,访问较慢,
+  // 所以设置 62S 后才进行下载,即便这样,任然有可能出现下载的图片无法完全显示的情况(原图太大,服务器下载较慢)
+  down:function(){
+    var that = this
+    var url = that.data.url;    
+    wx.downloadFile({
+      url: url,
+      success:function(res){
+        wx.showToast({
+          title: '已加入任务',
+          duration: 1000,
+          mask: 'true'
+        })
+        setTimeout(function(){
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success: function (dres) {
+              console.log("这是下载成功了："+dres)
+            }
+          })
+        }, 180000)       
+      },
+      fail:function(e){ // 没有预览图片时提示用户
+        wx.showToast({
+          title: '请先预览图片',
+          image: '/pages/icon/gantan.png',
+          duration: 1000,
+          mask: 'true'
+        })
+      }
+    })
+  },
   // 复制图片链接到剪切板，供用户用浏览器下载
   click:function(e){
+    var that = this
     console.log(e);
     var full = e.currentTarget.dataset.full;    // 获取图片的超高清链接
     wx.setClipboardData({
@@ -145,9 +181,10 @@ Page({
   },
   // 预览图片
   previewImg: function(e) {
+    var that = this
     console.log(e);
     var rawurl = e.currentTarget.dataset.raw;   // 获取要预览的图片的链接
-    var picid = e.currentTarget.dataset.id;
+    var picid = e.currentTarget.dataset.id;     // 图片唯一Id
     wx.previewImage({
       urls: [rawurl],             // 设置 urls；可设置多个。
       success: function(res) {    // 插入预览记录
@@ -158,7 +195,20 @@ Page({
             console.log("插入成功："+e)
           }
         })
+      }
+    })
+
+    var full = e.currentTarget.dataset.full;    // 获取原图链接
+    wx.request({  // 向 nodejs 服务器发送要下载的原图链接,让服务器进行下载.
+      url: 'https://unsplash.xuuuuucong.top/getImg?',
+      data: {
+        uri: full,
       },
+      success: function (e) {     // 保存存储在 nodejs 服务器中的图片地址
+        var num = e.data.num
+        var url = 'https://unsplash.xuuuuucong.top/public/images/' + num + '.jpg'
+        that.data.url = url        
+      }
     })
   },
   // 查询图片
