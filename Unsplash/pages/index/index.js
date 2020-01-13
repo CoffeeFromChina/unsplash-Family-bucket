@@ -108,7 +108,7 @@ Page({
   // 所以设置 62S 后才进行下载,即便这样,任然有可能出现下载的图片无法完全显示的情况(原图太大,服务器下载较慢)
   down:function(){
     var that = this
-    var url = that.data.url;    
+    var url = that.data.url;
     wx.downloadFile({
       url: url,
       success:function(res){
@@ -184,7 +184,21 @@ Page({
     var that = this
     console.log(e);
     var rawurl = e.currentTarget.dataset.raw;   // 获取要预览的图片的链接
+    var full = e.currentTarget.dataset.full;    // 获取原图链接
     var picid = e.currentTarget.dataset.id;     // 图片唯一Id
+
+    wx.request({  // 向 nodejs 服务器发送要下载的原图链接,让服务器进行下载.
+      url: 'https://unsplash.xuuuuucong.top/getImg?',
+      data: {
+        uri: full,                // 要下载的图片链接
+        id: picid                 // 向服务器发送图片 Id,其作用是以Id为名称保存图片
+      }
+    })
+
+    var url = 'https://unsplash.xuuuuucong.top/public/images/' + picid + '.jpg'
+    that.data.url = url
+    console.log("哈哈哈+" + that.data.url)
+    
     wx.previewImage({
       urls: [rawurl],             // 设置 urls；可设置多个。
       success: function(res) {    // 插入预览记录
@@ -193,23 +207,21 @@ Page({
           url: 'https://xuuuuucong.top/unsplashapi/insertWatch/' + app.globalData.openid + '/' + picid,
           success:function(e){
             console.log("插入成功："+e)
+            wx.request({
+              url: 'https://xuuuuucong.top/unsplashapi/downPicture/'+picid,  // 保存已下载的图片Id
+              success: function (e) {
+                console.log("id插入成功" + e)
+              }
+            })
           }
         })
+      },
+      complete:function(){
+        
       }
     })
 
-    var full = e.currentTarget.dataset.full;    // 获取原图链接
-    wx.request({  // 向 nodejs 服务器发送要下载的原图链接,让服务器进行下载.
-      url: 'https://unsplash.xuuuuucong.top/getImg?',
-      data: {
-        uri: full,
-      },
-      success: function (e) {     // 保存存储在 nodejs 服务器中的图片地址
-        var num = e.data.num
-        var url = 'https://unsplash.xuuuuucong.top/public/images/' + num + '.jpg'
-        that.data.url = url        
-      }
-    })
+    
   },
   // 查询图片
   onSearch: function(e){
