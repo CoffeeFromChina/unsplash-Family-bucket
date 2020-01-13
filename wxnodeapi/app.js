@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.get('/public/images/:fileName', function (req, res) {
+
 	var fileName = req.params.fileName;
 	var filePath = path.join('./public/images', fileName);
 
@@ -48,12 +49,12 @@ app.get('/getImg',function (req, res){
 	let opts = {
       url: params.uri,
     }; 
-	var num = Math.round(Math.random()*100000);
-    let path = "./public/images/"+num+".jpg";
+	// var num = Math.round(Math.random()*100000);
+    let path = "./public/images/"+params.id+".jpg";
 	
 	UT.downImg(opts, path,res);
-	var obj = {"num":num};
-	res.end(JSON.stringify(obj));
+	// var obj = {"num":num};
+	// res.end(JSON.stringify(obj));
  });
 
 
