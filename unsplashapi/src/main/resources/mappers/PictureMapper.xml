@@ -246,4 +246,8 @@
     order by updated_at DESC, created_at DESC
     LIMIT #{limitStart},#{limitCount}
   </select>
+
+  <insert id="downPicture">
+    REPLACE INTO picture_save_picture(picid) VALUES(#{picid})
+  </insert>
 </mapper>

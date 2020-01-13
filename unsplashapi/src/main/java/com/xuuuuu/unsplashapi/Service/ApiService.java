@@ -46,4 +46,7 @@ public interface ApiService {
 
 	// 用户预览图片时插入预览记录
 	boolean insertWatch(String id, String openid, String picid);
+
+	// 保存已下载的图片Id
+	Boolean downPicture(String picid);
 }

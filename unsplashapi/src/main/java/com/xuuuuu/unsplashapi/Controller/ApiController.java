@@ -95,4 +95,10 @@ public class ApiController {
 		String id = uuid.toString();
 		return resultGenerator.genSuccessResult(apiService.insertWatch(id, openid, picid));
 	}
+
+	// 保存已下载的图片Id
+	@RequestMapping(value = "/downPicture/{picid}", method = RequestMethod.GET)
+	public Result downPicture(@PathVariable("picid") String picid){
+		return resultGenerator.genSuccessResult(apiService.downPicture(picid));
+	}
 }

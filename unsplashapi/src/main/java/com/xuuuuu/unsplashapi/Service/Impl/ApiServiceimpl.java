@@ -86,4 +86,9 @@ public class ApiServiceimpl implements ApiService {
 	public boolean insertWatch(String id, String openid, String picid) {
 		return picturePictureMapper.insertWatch(id, openid, picid);
 	}
+
+	@Override
+	public Boolean downPicture(String picid) {
+		return pictureMapper.downPicture(picid);
+	}
 }

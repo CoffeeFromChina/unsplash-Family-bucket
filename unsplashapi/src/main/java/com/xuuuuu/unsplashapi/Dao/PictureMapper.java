@@ -44,4 +44,7 @@ public interface PictureMapper {
 
 	// 获取用户预览过的图片
 	List<Picture> getAllWatch(@Param("openid") String openid, @Param("limitStart") int limitStart, @Param("limitCount") int limitCount);
+
+	// 保存已下载的图片Id
+	Boolean downPicture(@Param("picid") String picid);
 }
