@@ -111,7 +111,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var that = this;
+    that.setData({
+      pictureArray: [],   // 重置数据数组
+      start: 0,           // 重置获取数据的数量
+    })
+    that.getSeverDownPicture()
+    wx.stopPullDownRefresh(); // 获取完数据后停止刷新事件
+    console.log("刷新完成")
   },
 
   /**
