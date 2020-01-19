@@ -250,4 +250,15 @@
   <insert id="downPicture">
     REPLACE INTO picture_save_picture(picid) VALUES(#{picid})
   </insert>
+
+  <select id="getDown" resultMap="BaseResultMap">
+    SELECT * FROM picture_message as t1,
+    (
+        ( SELECT * FROM picture_save_picture) as c1
+    )
+    WHERE
+    t1.id = c1.picid
+    order by updated_at DESC, created_at DESC
+    LIMIT #{limitStart}, #{limitCount};
+  </select>
 </mapper>

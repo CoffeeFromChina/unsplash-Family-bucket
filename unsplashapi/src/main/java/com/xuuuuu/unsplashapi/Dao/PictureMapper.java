@@ -47,4 +47,7 @@ public interface PictureMapper {
 
 	// 保存已下载的图片Id
 	Boolean downPicture(@Param("picid") String picid);
+
+	// 获取以下载到服务器端的图片数据
+	List<Picture> getDown(@Param("limitStart") int limitStart, @Param("limitCount") int limitCount);
 }

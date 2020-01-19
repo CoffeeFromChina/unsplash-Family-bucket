@@ -49,4 +49,7 @@ public interface ApiService {
 
 	// 保存已下载的图片Id
 	Boolean downPicture(String picid);
+
+	// 获取以下载到服务器端的图片数据
+	List<Picture> getDown(String limitStart, String limitCount);
 }

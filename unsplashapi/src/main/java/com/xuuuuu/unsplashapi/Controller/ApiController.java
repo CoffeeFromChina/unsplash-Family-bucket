@@ -101,4 +101,10 @@ public class ApiController {
 	public Result downPicture(@PathVariable("picid") String picid){
 		return resultGenerator.genSuccessResult(apiService.downPicture(picid));
 	}
+
+	// 获取以下载到服务器端的图片数据
+	@RequestMapping(value = "/getDown/{limitStart}/{limitCount}", method = RequestMethod.GET)
+	public Result getDown(@PathVariable("limitStart") String limitStart, @PathVariable("limitCount") String limitCount){
+		return resultGenerator.genSuccessResult(apiService.getDown(limitStart, limitCount));
+	}
 }

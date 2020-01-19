@@ -91,4 +91,9 @@ public class ApiServiceimpl implements ApiService {
 	public Boolean downPicture(String picid) {
 		return pictureMapper.downPicture(picid);
 	}
+
+	@Override
+	public List<Picture> getDown(String limitStart, String limitCount) {
+		return pictureMapper.getDown(Integer.parseInt(limitStart), Integer.parseInt(limitCount));
+	}
 }
