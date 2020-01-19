@@ -1,16 +1,4 @@
-<view class='mask' hidden="{{hiddenn}}"></view><!-- 蒙层 -->
-<image bindtap="goUp" class="goUp" src="../icon/up.png"></image>
-<image bindtap="hiddennInput"  class="research" src="../icon/research.png"></image>
-<van-notice-bar
-  wrapable
-  mode="closeable"
-  scrollable="false"
-  text="因 Unsplash 为国外网站,所以服务器下载原图较慢,请见谅."
-/>
-<view hidden="{{hiddenn}}">
-  <van-search value="{{ value }}" focus="true" show-action background="none" class="input" name="search" shape="round" bind:search="onSearch" bind:cancel="cancelSearch" placeholder="请输入搜索关键词" />
-</view>
-
+<image bindtap="goUp" class="goUp" src="../../icon/up.png"></image>
 <view wx:for="{{pictureArray}}" wx:for-item="index">
   <view class="card">
     <van-card
@@ -24,15 +12,15 @@
     >
       <view slot="footer">
         <van-row>
-          <van-col offset="17" span="1">
-            <van-icon name="down" bindtap="down" />
+          <van-col offset="20" span="1">
+            <van-icon name="down" data-id="{{pictureArray[index].id}}" bindtap="down" />
           </van-col>
-          <van-col offset="1" span="1">
+          <!-- <van-col offset="1" span="1">
             <van-icon class="juzhong" data-full="{{pictureArray[index].urlsFull}}" bindtap="click" name="/pages/icon/copy.png" />
-          </van-col>
-          <van-col offset="1" span="1">
+          </van-col> -->
+          <!-- <van-col offset="1" span="1">
             <van-icon data-id="{{pictureArray[index].id}}" bindtap="like" offset="1" span="3" name="like-o" />
-          </van-col>
+          </van-col> -->
           <van-col offset="1" span="1">
             <van-icon span="1" data-id="{{pictureArray[index].id}}" data-full="{{pictureArray[index].urlsFull}}" data-raw="{{pictureArray[index].urlsSmall}}" bindtap="previewImg" name="eye-o" />
             </van-col>

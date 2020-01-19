@@ -216,13 +216,9 @@ Page({
           }
         })
       },
-      complete:function(){
-        
-      }
     })
-
-    
   },
+  
   // 查询图片
   onSearch: function(e){
     var that = this    
