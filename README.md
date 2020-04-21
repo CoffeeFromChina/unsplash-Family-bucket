@@ -7,8 +7,8 @@
 - picture_message.sql ----> 数据库SQL
 
 <center class="half">
-	<img src=".\photo\Screenshot_20200421_164952_com.tencent.mm.jpg" alt="main" style="zoom:20%;" /><img src=".\photo\Screenshot_20200421_165002_com.tencent.mm.jpg" alt="main" style="zoom:20%;" />
+	<img src=".\photo\main.jpg" alt="main" style="zoom:20%;" /><img src=".\photo\my.jpg" alt="my" style="zoom:20%;" />
 </center>
 
-![二维码](.\photo\gh_c4d4e98a9c91_258.jpg)
+![二维码](.\photo\erweima.jpg)
 
